@@ -7,5 +7,13 @@ gem 'rails', '4.0.0'
 gem 'mysql2'
 
 # Testing stuff
-gem 'factory_girl_rails'
-gem 'rspec-rails'
+group :development, :test do
+  gem 'factory_girl_rails'
+  gem 'rspec-rails'
+
+  gem 'guard-rspec'
+  gem 'guard-livereload'
+  gem 'rb-fsevent', '~> 0.9'
+
+  gem 'simplecov'
+end

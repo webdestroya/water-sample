@@ -2,9 +2,10 @@
 
 FactoryGirl.define do
   factory :factor_weight do
-    chloroform_weight 1.5
-    bromoform_weight 1.5
+    id                          1
+    chloroform_weight           0.8
+    bromoform_weight            1.2
     bromodichloromethane_weight 1.5
-    dibromichloromethane_weight 1.5
+    dibromichloromethane_weight 0.7
   end
 end

@@ -5,8 +5,6 @@ class CreateFactorWeights < ActiveRecord::Migration
       t.float :bromoform_weight
       t.float :bromodichloromethane_weight
       t.float :dibromichloromethane_weight
-
-      t.timestamps
     end
   end
 end

@@ -14,22 +14,18 @@
 ActiveRecord::Schema.define(version: 20131031043643) do
 
   create_table "factor_weights", force: true do |t|
-    t.float    "chloroform_weight"
-    t.float    "bromoform_weight"
-    t.float    "bromodichloromethane_weight"
-    t.float    "dibromichloromethane_weight"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.float "chloroform_weight"
+    t.float "bromoform_weight"
+    t.float "bromodichloromethane_weight"
+    t.float "dibromichloromethane_weight"
   end
 
   create_table "water_samples", force: true do |t|
-    t.string   "site"
-    t.float    "chloroform"
-    t.float    "bromoform"
-    t.float    "bromodichloromethane"
-    t.float    "dibromichloromethane"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string "site"
+    t.float  "chloroform"
+    t.float  "bromoform"
+    t.float  "bromodichloromethane"
+    t.float  "dibromichloromethane"
   end
 
 end
