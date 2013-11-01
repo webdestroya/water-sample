@@ -3,7 +3,7 @@ require 'spec_helper'
 describe WaterSample do
   describe '#find' do
     it 'verifies that finder returns the proper object' do
-      FactoryGirl.build(:water_sample2)
+      FactoryGirl.create(:water_sample2)
 
       sample2 = WaterSample.find(2)
       sample2.should_not be_nil
@@ -17,7 +17,7 @@ describe WaterSample do
 
   describe '#to_hash' do
     it 'converts hash without factors' do
-      sample = FactoryGirl.build(:water_sample)
+      sample = FactoryGirl.create(:water_sample)
       hash = sample.to_hash
       
       hash.should_not be_nil
@@ -30,8 +30,8 @@ describe WaterSample do
     end
 
     it 'converts hash with factors' do
-      FactoryGirl.build(:factor_weight)
-      sample = FactoryGirl.build(:water_sample)
+      FactoryGirl.create(:factor_weight)
+      sample = FactoryGirl.create(:water_sample)
 
       hash = sample.to_hash(true)
 
@@ -44,9 +44,23 @@ describe WaterSample do
 
   describe '#factor' do
     it 'verifies factor calculation' do
-      FactoryGirl.build(:factor_weight)
-      sample = FactoryGirl.build(:water_sample)
+      FactoryGirl.create(:factor_weight)
+      sample = FactoryGirl.create(:water_sample)
       sample.factor(1).should eq(0.004992)
+    end
+
+    it 'validates the formula' do
+      factor = FactoryGirl.create(:factor_weight)
+      sample = FactoryGirl.create(:water_sample)
+
+      weight = 0
+      weight = weight + (sample.chloroform * factor.chloroform_weight)
+      weight = weight + (sample.bromoform * factor.bromoform_weight)
+      weight = weight + (sample.bromodichloromethane * factor.bromodichloromethane_weight)
+      weight = weight + (sample.dibromichloromethane * factor.dibromichloromethane_weight)
+
+      sample.factor(factor.id).should == weight
+
     end
   end
 

@@ -32,4 +32,10 @@ RSpec.configure do |config|
   config.treat_symbols_as_metadata_keys_with_true_values = true
   config.filter_run focus: true
   config.run_all_when_everything_filtered = true
+
+  config.after(:each) do
+    # Cleanup any entities that we failed to remove ourselves
+    WaterSample.destroy_all
+    FactorWeight.destroy_all
+  end
 end
