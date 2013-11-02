@@ -4,7 +4,7 @@
 # Implement the methods as specfied in the following class, plus any you need to use to make your life easier.
 # Make explicit any dependencies on external libraries so that I can run your code locally.
 #
-# Los Angeles recently sampled water quality at various sites, and recorded the 
+# Los Angeles recently sampled water quality at various sites, and recorded the
 # presence of contaminants. Here's an excerpt of the table:
 # (from: http://file.lacounty.gov/bc/q3_2010/cms1_148456.pdf)
 # (All chemical values are in mg/L)
@@ -34,7 +34,7 @@ class WaterSample < ActiveRecord::Base
     # sample2.bromoform.should == 0.00487
     # sample2.bromodichloromethane.should == 0.00547
     # sample2.dibromichloromethane.should == 0.0109
-    
+
     super
   end
 
@@ -103,14 +103,15 @@ class WaterSample < ActiveRecord::Base
     # sample2.to_hash(true) 
     # #let's say only 3 factors exist in our factors table, with ids of 5, 6, and 9 
     #   => {:id =>2, :site => "North Hollywood Pump Station (well blend)", :chloroform => .00291, :bromoform => .00487, :bro   modichloromethane => .00547 , :dibromichlormethane => .0109, :factor_5 => .0213, :factor_6 => .0432, :factor_9 => 0.0321}
-    hash = self.attributes.symbolize_keys!
+    hash = self.attributes
 
     if include_factors
-      FactorWeight.all.each do |factor_weight|
-        hash[ "factor_#{factor_weight.id}".to_sym ] = self.factor(factor_weight.id)
+      FactorWeight.pluck(:id).each do |factor_weight_id|
+        hash[ "factor_#{factor_weight_id}" ] = self.factor(factor_weight_id)
       end
     end
-    hash
+
+    hash.symbolize_keys
   end
 
 
