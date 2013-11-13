@@ -1,4 +1,4 @@
-# ZestFinance Homework
+# WaterSample Homework
 
 To run the test specs, do:
 
